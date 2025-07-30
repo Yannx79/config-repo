@@ -4,21 +4,23 @@ server:
 spring:
   application:
     name: gateway-service
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-
-spring:
   cloud:
     gateway:
       discovery:
         locator:
-          enabled: true     # permite usar nombres de microservicio en rutas
+          enabled: true
           lower-case-service-id: true
       routes:
         - id: product-service
           uri: lb://product-service
           predicates:
             - Path=/products/**
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/users/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
