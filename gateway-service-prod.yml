@@ -1,0 +1,24 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true     # permite usar nombres de microservicio en rutas
+          lower-case-service-id: true
+      routes:
+        - id: product-service
+          uri: lb://product-service
+          predicates:
+            - Path=/products/**
