@@ -4,6 +4,9 @@ server:
 spring:
   application:
     name: gateway-service
+  web:
+    resources:
+      add-mappings: false
   cloud:
     gateway:
       discovery:
